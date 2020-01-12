@@ -9,4 +9,7 @@ export class TabsPage {
 
   constructor() {}
 
+  addTask(){
+  }
+
 }

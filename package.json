@@ -1,8 +1,8 @@
 {
   "name": "TasksApp",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Johannes Munker",
+  "homepage": "jo-munker.de",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -25,12 +25,13 @@
     "@ionic/angular": "^4.7.1",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
+    "tree-kill": "^1.2.2",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "~0.801.2",
+    "@angular-devkit/build-angular": "^0.803.22",
     "@angular-devkit/core": "~8.1.2",
     "@angular-devkit/schematics": "~8.1.2",
     "@angular/cli": "~8.1.2",
