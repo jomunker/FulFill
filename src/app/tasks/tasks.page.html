@@ -1,16 +1,27 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Tasks</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addTask()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
   <!-- fab to add a Task -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button [routerLink]="'/new-task/'" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
+
+  <ion-list>
+    <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id" routerDirection="forward">
+      <ion-label>{{ task.title }}</ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
