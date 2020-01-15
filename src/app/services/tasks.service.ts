@@ -49,7 +49,7 @@ export class TasksService {
 
   save(): void {
     // Save the current array of notes to storage
-    this.storage.set('notes', this.tasks);
+    this.storage.set('tasks', this.tasks);
   }
 
   getNote(id): Task {
@@ -57,7 +57,7 @@ export class TasksService {
     return this.tasks.find(task => task.id === id);
   }
 
-  createTask(title): void {
+  createTask(title,description): void {
 
     // Create a unique id that is one larger than the current largest id
     let id = Math.max(...this.tasks.map(task => parseInt(task.id)), 0) + 1;
@@ -68,12 +68,11 @@ export class TasksService {
       console.log("Please enter your Task!")
       
     } else {
-      console.log("chund");
 
       this.tasks.push({
         id: id.toString(),
         title: title,
-        content: ''
+        content: description,
       });
 
       this.save();

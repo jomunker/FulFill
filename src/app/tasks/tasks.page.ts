@@ -34,7 +34,7 @@ export class TasksPage implements OnInit {
         {
           text: 'Save',
           handler: (data) => {
-            this.tasksService.createTask(data.title);
+            this.tasksService.createTask(data.title,'');
           }
         }
       ]

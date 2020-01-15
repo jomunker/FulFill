@@ -1,13 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/tasks"></ion-back-button>
     </ion-buttons>
     <ion-title>New Task</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="saveTask()" >
-         <!-- [routerLink]="'/tab1/'" routerDirection="backward" -->
-        <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+      <ion-button (click)="addTask()" >
+          <ion-icon slot="icon-only" name="checkmark"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -17,14 +16,10 @@
   <form>
     <ion-item>
       <ion-label>Title</ion-label>
-      <ion-input name="title"></ion-input>
+      <ion-input name="title" [(ngModel)]="task.title"></ion-input>
     </ion-item>
   </form>
 
-  <ion-buttons>
-    <ion-button (click)="getTasks()" >
-      <ion-icon slot="icon-only" name="checkmark"></ion-icon>
-    </ion-button>
-  </ion-buttons>
+  <ion-textarea [(ngModel)]="task.content" placeholder="...write something to describe your task."></ion-textarea>
 
 </ion-content>

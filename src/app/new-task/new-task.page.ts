@@ -1,24 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
+import { Location } from '@angular/common';
+import { Task } from '../interfaces/task';
+
 
 @Component({
   selector: 'app-new-task',
   templateUrl: './new-task.page.html',
   styleUrls: ['./new-task.page.scss'],
 })
+
 export class NewTaskPage implements OnInit {
 
-  constructor(private tasksService: TasksService) { }
+  public task: Task;
 
-  ngOnInit() {
+  constructor(private tasksService: TasksService, private location: Location) {
+
+    this.task = {
+      id: '',
+      title: '',
+      content: ''
+    };
   }
 
-  saveTask(value: { title: string }) {
-    this.tasksService.saveTask(value);
-  }
+  ngOnInit() { }
 
-  getTasks(){
+  addTask() {
+    this.tasksService.createTask(this.task.title,this.task.content);
 
+    this.location.back();
   }
 
 }
