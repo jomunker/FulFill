@@ -18,29 +18,29 @@ export class TasksPage implements OnInit {
 
   addTask(){
 
-    this.alertCtrl.create({
-      header: 'New Task',
-      message: 'Type in your Task.',
-      inputs: [
-        {
-          type: 'text',
-          name: 'title'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel'
-        },
-        {
-          text: 'Save',
-          handler: (data) => {
-            this.tasksService.createTask(data.title,'');
-          }
-        }
-      ]
-    }).then((alert) => {
-      alert.present();
-    });
+  //   this.alertCtrl.create({
+  //     header: 'New Task',
+  //     message: 'Type in your Task.',
+  //     inputs: [
+  //       {
+  //         type: 'text',
+  //         name: 'title'
+  //       }
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel'
+  //       },
+  //       {
+  //         text: 'Save',
+  //         handler: (data) => {
+  //           this.tasksService.createTask(data.title,'',);
+  //         }
+  //       }
+  //     ]
+  //   }).then((alert) => {
+  //     alert.present();
+  //   });
 
   }
 

@@ -19,7 +19,9 @@ export class DetailsPage implements OnInit {
     this.task = {
       id: '',
       title: '',
-      content: ''
+      content: '',
+      date: '',
+      time: '',
     };
 
   }
@@ -32,10 +34,10 @@ export class DetailsPage implements OnInit {
     // Check that the data is loaded before getting the note
     // This handles the case where the detail page is loaded directly via the URL
     if(this.tasksService.loaded){
-      this.task = this.tasksService.getNote(taskId)
+      this.task = this.tasksService.getTask(taskId)
     } else {
       this.tasksService.load().then(() => {
-        this.task = this.tasksService.getNote(taskId)
+        this.task = this.tasksService.getTask(taskId)
       });
     }
 
@@ -46,7 +48,7 @@ export class DetailsPage implements OnInit {
   }
 
   deleteTask(){
-    this.tasksService.deleteNote(this.task);
+    this.tasksService.deleteTask(this.task);
     this.location.back();
   }
 

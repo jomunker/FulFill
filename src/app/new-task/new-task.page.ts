@@ -14,19 +14,36 @@ export class NewTaskPage implements OnInit {
 
   public task: Task;
 
+  public taskTime = new Date();
+  public taskDate = new Date();
+
+  
+
   constructor(private tasksService: TasksService, private location: Location) {
 
     this.task = {
       id: '',
       title: '',
-      content: ''
+      content: '',
+      date: '',
+      time: '',
     };
+
+
+
   }
+
 
   ngOnInit() { }
 
   addTask() {
-    this.tasksService.createTask(this.task.title,this.task.content);
+    this.task.date = this.tasksService.getDate(this.taskDate);
+    console.log(this.task.date);
+    this.task.time = this.tasksService.getTime(this.taskTime);
+    console.log(this.task.time);   
+
+
+    this.tasksService.createTask(this.task.title,this.task.content,this.task.date,this.task.time);
 
     this.location.back();
   }

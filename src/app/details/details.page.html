@@ -1,17 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tasks"></ion-back-button>
+      <ion-back-button (input)="taskChanged()" ></ion-back-button>
     </ion-buttons>
-    <ion-title><ion-input (input)="taskChanged()" [(ngModel)]="task.title"></ion-input></ion-title>
+    <ion-title>
+      <ion-input (input)="taskChanged()" [(ngModel)]="task.title"></ion-input>
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="deleteTask()">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content class="ion-padding">
+  <ion-datetime (input)="taskChanged()" [(ngModel)]="task.date" displayFormat="DD.MM.YYYY"></ion-datetime>
+  <ion-datetime (input)="taskChanged()" [(ngModel)]="task.time" displayFormat="HH:mm"></ion-datetime>
   <ion-textarea (input)="taskChanged()" [(ngModel)]="task.content" placeholder="...write something to describe your task."></ion-textarea>
 </ion-content>

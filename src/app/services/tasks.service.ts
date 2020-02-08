@@ -11,17 +11,8 @@ export class TasksService {
   public tasks: Task[] = [];
   public loaded: boolean = false;
 
-  // private tasks: { title: string }[] = [];
 
   constructor(public storage: Storage) { }
-
-  // saveTask(task: { title: string }) {
-  //   this.tasks.push(task);
-  // }
-
-  // getTasks() {
-  //   return [...this.tasks];
-  // }
 
 
   load(): Promise<boolean> {
@@ -29,10 +20,10 @@ export class TasksService {
     // Return a promise so that we know when this operation has completed
     return new Promise((resolve) => {
 
-      // Get the notes that were saved into storage
+      // Get the tasks that were saved into storage
       this.storage.get('tasks').then((tasks) => {
 
-        // Only set this.notes to the returned value if there were values stored
+        // Only set this.tasks to the returned value if there were values stored
         if (tasks != null) {
           this.tasks = tasks;
         }
@@ -48,16 +39,16 @@ export class TasksService {
   }
 
   save(): void {
-    // Save the current array of notes to storage
+    // Save the current array of tasks to storage
     this.storage.set('tasks', this.tasks);
   }
 
-  getNote(id): Task {
-    // Return the note that has an id matching the id passed in
+  getTask(id): Task {
+    // Return the task that has an id matching the id passed in
     return this.tasks.find(task => task.id === id);
   }
 
-  createTask(title,description): void {
+  createTask(title,description,date,time): void {
 
     // Create a unique id that is one larger than the current largest id
     let id = Math.max(...this.tasks.map(task => parseInt(task.id)), 0) + 1;
@@ -73,6 +64,8 @@ export class TasksService {
         id: id.toString(),
         title: title,
         content: description,
+        date: date,
+        time: time,
       });
 
       this.save();
@@ -80,9 +73,30 @@ export class TasksService {
 
   }
 
-  deleteNote(task): void {
+  getDate(date) {
 
-    // Get the index in the array of the note that was passed in
+    let options = {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric'
+    }
+
+    return date.toLocaleString('de-en', options);
+  }
+
+  getTime(time) {
+
+    let options = {
+      hour: 'numeric',
+      minute: 'numeric'
+    }
+
+    return time.toLocaleString('de-en', options);
+  }
+
+  deleteTask(task): void {
+
+    // Get the index in the array of the task that was passed in
     let index = this.tasks.indexOf(task);
 
     // Delete that element of the array and resave the data

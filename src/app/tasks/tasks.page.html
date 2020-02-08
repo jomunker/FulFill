@@ -19,9 +19,16 @@
   </ion-fab> -->
 
   <ion-list>
-    <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id" routerDirection="forward">
+    <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id"
+      routerDirection="forward">
       <ion-label>{{ task.title }}</ion-label>
+      
     </ion-item>
+    <ion-item>
+      <ion-label>{{ task.time }}</ion-label>
+    </ion-item>
+
+
   </ion-list>
 
 </ion-content>
