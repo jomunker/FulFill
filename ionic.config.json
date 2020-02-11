@@ -1,7 +1,8 @@
 {
   "name": "TasksApp",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }
