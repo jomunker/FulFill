@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
+
 import { Storage } from '@ionic/storage';
 
-import { Task } from '../interfaces/task';
+import { Category } from '../interfaces/category';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class TasksService {
+export class CategoriesService {
 
-  public tasks: Task[] = [];
+  public categories: Category[] = [];
   public loaded: boolean = false;
 
 
@@ -21,11 +23,11 @@ export class TasksService {
     return new Promise((resolve) => {
 
       // Get the tasks that were saved into storage
-      this.storage.get('tasks').then((tasks) => {
+      this.storage.get('categories').then((categories) => {
 
         // Only set this.tasks to the returned value if there were values stored
-        if (tasks != null) {
-          this.tasks = tasks;
+        if (categories != null) {
+          this.categories = categories;
         }
 
         // This allows us to check if the data has been loaded in or not
@@ -40,33 +42,36 @@ export class TasksService {
 
   save(): void {
     // Save the current array of tasks to storage
-    this.storage.set('tasks', this.tasks);
+    this.storage.set('categories', this.categories);
   }
 
-  getTask(id): Task {
+  getTask(id): Category {
     // Return the task that has an id matching the id passed in
-    return this.tasks.find(task => task.id === id);
+    return this.categories.find(category => category.id === id);
   }
 
-  createTask(title, category, description, date, time): void {
+  createCategory(title): void {
 
     // Create a unique id that is one larger than the current largest id
-    let id = Math.max(...this.tasks.map(task => parseInt(task.id)), 0) + 1;
+    let id = Math.max(...this.categories.map(category => parseInt(category.id)), 0) + 1;
 
-
+    for (let i = 0; i < this.categories.length; i++) {
+      if (title == this.categories[i].title) {
+        console.log("The Categorie already exists!")
+        return;
+      }
+    }
 
     if (title == "") {
-      console.log("Please enter your Task!")
+      console.log("Please enter a Category!")
+      return;
+    }
+    else {
 
-    } else {
-
-      this.tasks.push({
+      this.categories.push({
         id: id.toString(),
         title: title,
-        category: category,
-        content: description,
-        date: date,
-        time: time,
+        //color: color,
       });
 
       this.save();
@@ -74,40 +79,16 @@ export class TasksService {
 
   }
 
-  getDate(date) {
-
-    let options = {
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric'
-    }
-
-    return date.toLocaleString('de-en', options);
-  }
-
-  getTime(time) {
-
-    let options = {
-      hour: 'numeric',
-      minute: 'numeric'
-    }
-
-    return time.toLocaleString('de-en', options);
-  }
-
-  deleteTask(task): void {
+  deleteCategory(category): void {
 
     // Get the index in the array of the task that was passed in
-    let index = this.tasks.indexOf(task);
+    let index = this.categories.indexOf(category);
 
     // Delete that element of the array and resave the data
     if (index > -1) {
-      this.tasks.splice(index, 1);
+      this.categories.splice(index, 1);
       this.save();
     }
 
   }
-
 }
-
-

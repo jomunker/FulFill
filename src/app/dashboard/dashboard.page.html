@@ -17,18 +17,17 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab> -->
-
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+</ion-refresher>   -->
   <ion-list>
     <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id"
       routerDirection="forward">
       <ion-icon name="bookmark"></ion-icon>
       <ion-label>{{ task.title }}</ion-label>
-      <ion-label color="medium">{{ task.content }}</ion-label>
-      <ion-label>{{ task.time }} Uhr</ion-label>
-      
-    </ion-item>
-    
-    
+      <ion-label color="primary" >{{ task.category }}</ion-label>
+      <ion-label>{{ task.time }} Uhr</ion-label>      
+    </ion-item>  
 
   </ion-list>
 

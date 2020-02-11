@@ -14,10 +14,13 @@ const routes: Routes = [
   { path: 'new-task', loadChildren: () => import('./new-task/new-task.module').then(m => m.NewTaskPageModule) },
   
   { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule) },
-  {
-    path: 'details',
-    loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
-  }
+
+  { path: 'details', loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule) },
+
+  { path: 'category', loadChildren: () => import('./category/category.module').then( m => m.CategoryPageModule) },
+
+  { path: "category/:id", loadChildren: "./category/category.module#CategoryPageModule" },
+
 
 ];
 

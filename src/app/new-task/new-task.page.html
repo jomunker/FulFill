@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tasks"></ion-back-button>
     </ion-buttons>
@@ -19,6 +19,13 @@
       <ion-input name="title" [(ngModel)]="task.title" placeholder="Type your Task here!"></ion-input>
     </ion-item>
   </form>
+  <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select name="category" [(ngModel)]="task.category" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Select One" [compareWith]="compareWith">
+      <ion-select-option *ngFor="let category of categoriesService.categories">{{category.title}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button (click)="addCategory()">Add a Category</ion-button>
   <ion-textarea [(ngModel)]="task.content" placeholder="...write something to describe your task."></ion-textarea>
   <ion-item>
     <ion-label>Date</ion-label>

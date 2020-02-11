@@ -4,6 +4,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-label>Categories</ion-label>
+  <ion-list>
+  <ion-item button detail *ngFor="let category of categoriesService.categories"  [routerLink]="'/category/' + category.id"
+  routerDirection="forward">
+    <ion-label>{{ category.title }}</ion-label>
+    <!-- <ion-select name="category"  (ionChange)="categoryChanged()">
+      
+    </ion-select> -->
+  </ion-item>
+</ion-list>
 
+  <ion-button (click)="addCategory()">Add a Category</ion-button>
+
+  <ion-item *ngFor="let category of categoriesService.tasks">
+      <ion-label>{{ category.title }}</ion-label>
+      
+    </ion-item>  
 </ion-content>
