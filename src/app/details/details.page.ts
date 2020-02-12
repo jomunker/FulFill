@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 import { TasksService } from '../services/tasks.service';
 import { CategoriesService } from '../services/categories.service';
+import { PreferencesService } from '../services/preferences.service';
+
 import { Task } from '../interfaces/task';
 import { Category } from '../interfaces/category';
-import { Router } from '@angular/router';
+
 import { Location } from '@angular/common';
 
 import { AlertController} from '@ionic/angular';
@@ -20,13 +24,15 @@ export class DetailsPage implements OnInit {
   public task: Task;
   public category: Category;
 
-  constructor(private route: ActivatedRoute, private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController) { 
+  constructor(private route: ActivatedRoute, private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController, private notifications: PreferencesService) { 
 
     this.task = {
       id: '',
       title: '',
       category: '',
       content: '',
+      timed: false,
+      notification: false,
       date: '',
       time: '',
     };
@@ -87,6 +93,16 @@ export class DetailsPage implements OnInit {
       alert.present();
     });
   }
+  // setNotification() {
+  //   this.notifications.init();
+  //   if (this.task.time != '' || this.task.title != '') {
+  //     this.notifications.scheduleOnce(this.task.time, this.task.title, this.task.content);
+  //   }
+  // }
+
+  // initNotify() {
+  //   this.notifications.init();
+  // }
 
 }
 

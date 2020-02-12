@@ -5,14 +5,14 @@
     </ion-buttons>
     <ion-title>New Task</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="addTask()">
+      <ion-button (click)="addTask()"  (click)="setNotification()">
         <ion-icon slot="icon-only" name="checkmark"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <form>
     <ion-item>
       <ion-label>Title</ion-label>
@@ -21,19 +21,34 @@
   </form>
   <ion-item>
     <ion-label>Category</ion-label>
-    <ion-select name="category" [(ngModel)]="task.category" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Select One" [compareWith]="compareWith">
+    <ion-select name="category" [(ngModel)]="task.category" [interfaceOptions]="customAlertOptions" interface="alert"
+      placeholder="Select One" [compareWith]="compareWith">
       <ion-select-option *ngFor="let category of categoriesService.categories">{{category.title}}</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button (click)="addCategory()">Add a Category</ion-button>
-  <ion-textarea [(ngModel)]="task.content" placeholder="...write something to describe your task."></ion-textarea>
   <ion-item>
-    <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="task.taskDate" placeholder="Pick a date!"></ion-datetime>
+    <ion-button (click)="addCategory()">Add a Category</ion-button>
   </ion-item>
   <ion-item>
-    <ion-label>Time</ion-label>
-    <ion-datetime displayFormat="HH:mm" [(ngModel)]="task.taskTime" placeholder="Pick a time!"></ion-datetime>
+    <ion-textarea [(ngModel)]="task.content" placeholder="...write something to describe your task."></ion-textarea>
   </ion-item>
+  <ion-item>
+    <ion-label>Timed Task</ion-label>
+    <ion-toggle #timing [(ngModel)]="task.timed"></ion-toggle>
+  </ion-item>
+  <ion-list *ngIf="timing.checked">
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime (ionChange)="date(taskDate)" displayFormat="DD.MM.YYYY" [(ngModel)]="taskDate" placeholder="Pick a date!"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Time</ion-label>
+      <ion-datetime (ionChange)="time(taskTime)" displayFormat="HH:mm" [(ngModel)]="taskTime" placeholder="Pick a time!"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Notification</ion-label>
+      <ion-toggle #notifications (ionChange)="setNotification()" [(ngModel)]="task.notification"></ion-toggle>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

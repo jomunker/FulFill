@@ -3,6 +3,8 @@ export interface Task {
     title: string;
     category: string;
     content: string;
+    timed: boolean;
+    notification: boolean;
     date: string;
     time: string;
   }

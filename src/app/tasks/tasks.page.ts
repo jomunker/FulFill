@@ -28,6 +28,8 @@ export class TasksPage implements OnInit {
       title: '',
       category: '',
       content: '',
+      timed: false,
+      notification: false,
       date: '',
       time: '',
     };

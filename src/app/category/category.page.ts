@@ -24,6 +24,8 @@ export class CategoryPage implements OnInit {
       title: '',
       category: '',
       content: '',
+      timed: false,
+      notification: false,
       date: '',
       time: '',
     };
