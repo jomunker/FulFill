@@ -3,6 +3,9 @@ import { TasksService } from '../services/tasks.service';
 import { AlertController } from '@ionic/angular';
 import { Task } from '../interfaces/task';
 
+import { IonReorderGroup } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -10,6 +13,8 @@ import { Task } from '../interfaces/task';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+
+  reorderGroup: IonReorderGroup;
 
   // public task: Task;
 
@@ -32,6 +37,21 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.tasksService.load();
+  }
+
+  doReorder(ev: any) {
+    // The `from` and `to` properties contain the index of the item
+    // when the drag started and ended, respectively
+    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
+
+    // Finish the reorder and position the item in the DOM based on
+    // where the gesture ended. This method can also be called directly
+    // by the reorder group
+    ev.detail.complete();
+  }
+
+  toggleReorderGroup() {
+    this.reorderGroup.disabled = !this.reorderGroup.disabled;
   }
 
 

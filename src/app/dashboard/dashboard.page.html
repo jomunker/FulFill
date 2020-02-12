@@ -20,15 +20,24 @@
   <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
 </ion-refresher>   -->
-  <ion-list>
-    <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id"
-      routerDirection="forward">
-      <ion-icon name="bookmark"></ion-icon>
-      <ion-label>{{ task.title }}</ion-label>
-      <ion-label color="primary" >{{ task.category }}</ion-label>
-      <ion-label>{{ task.time }} Uhr</ion-label>      
-    </ion-item>  
 
+
+  <ion-list>
+    <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+
+      <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id"
+        routerDirection="forward">
+            <ion-reorder slot="start">
+              <!-- <ion-icon name="pizza"></ion-icon> -->
+            </ion-reorder>
+            <ion-label>{{ task.title }}</ion-label>
+            <ion-label color="primary">{{ task.category }}</ion-label>
+            <ion-label>{{ task.time }} Uhr</ion-label>
+      </ion-item>
+
+    </ion-reorder-group>
   </ion-list>
+
+
 
 </ion-content>
