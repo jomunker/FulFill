@@ -5,6 +5,7 @@ import { Task } from '../interfaces/task';
 
 import { IonReorderGroup } from '@ionic/angular';
 
+import { subDays, format, parseISO, formatISO } from 'date-fns'
 
 
 @Component({
@@ -19,6 +20,9 @@ export class DashboardPage implements OnInit {
   // public task: Task;
 
   // public myTime: string;
+
+  today = new Date();
+  todayString = formatISO(this.today);
 
   constructor(private alertCtrl: AlertController, public tasksService: TasksService) {
 
@@ -37,6 +41,10 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.tasksService.load();
+
+
+    this.today = parseISO(this.todayString);
+    this.todayString = format(this.today, 'dd.MM.yyyy')
   }
 
   doReorder(ev: any) {
@@ -52,6 +60,28 @@ export class DashboardPage implements OnInit {
 
   toggleReorderGroup() {
     this.reorderGroup.disabled = !this.reorderGroup.disabled;
+  }
+
+  nextDay() {
+    this.today = subDays(this.today, -1);
+    this.todayString = formatISO(this.today);
+    this.today = parseISO(this.todayString);
+    this.todayString = format(this.today, 'dd.MM.yyyy')
+    console.log(this.todayString);
+  }
+
+  // nextDay(today) {
+  //   this.today = subDays(this.today, -1);
+  //   this.todayString = format(today, 'dd.MM.yyyy')
+  //   console.log(today);
+  // }
+
+  prevDay() {
+    this.today = subDays(this.today, 1);
+    this.todayString = formatISO(this.today);
+    this.today = parseISO(this.todayString);
+    this.todayString = format(this.today, 'dd.MM.yyyy')
+    console.log(this.todayString);
   }
 
 
@@ -82,7 +112,7 @@ export class DashboardPage implements OnInit {
   //   });
 
   // }
-  
+
 
   doRefresh(event) {
     console.log('Begin async operation');

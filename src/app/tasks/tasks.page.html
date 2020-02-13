@@ -28,6 +28,7 @@
       <ion-icon name="bookmark"></ion-icon>
       <ion-label>{{ task.title }}</ion-label>
       <ion-label color="primary">{{ task.category }}</ion-label>
+      <!-- <ion-label>{{ task.date }}</ion-label> -->
       <ion-label>{{ task.time }} Uhr</ion-label>
     </ion-item>
   </ion-list>
@@ -38,17 +39,19 @@
       <ion-icon name="bookmark"></ion-icon>
       <ion-label>{{ task.title }}</ion-label>
       <ion-label color="primary">{{ task.category }}</ion-label>
+      <!-- <ion-label>{{ task.date }}</ion-label> -->
       <ion-label>{{ task.time }} Uhr</ion-label>
     </ion-item>
   </ion-list>
-
-  <ion-list *ngFor="let task of tasksService.tasks">
-    <ion-item button detail *ngIf="task.category == category.value" [hidden]="!task.category == category.value" [routerLink]="'/tasks/' + task.id" routerDirection="forward">
+<ng-container *ngFor="let task of tasksService.tasks">
+  <ion-list *ngIf="task.category == category.value">
+    <ion-item button detail [hidden]="!task.category == category.value" [routerLink]="'/tasks/' + task.id" routerDirection="forward">
         <ion-icon name="bookmark"></ion-icon>
         <ion-label>{{ task.title }}</ion-label>
         <ion-label color="primary">{{ task.category }}</ion-label>
+        <!-- <ion-label>{{ task.date }}</ion-label> -->
         <ion-label>{{ task.time }} Uhr</ion-label>
     </ion-item>
   </ion-list>
-
+</ng-container>
 </ion-content>

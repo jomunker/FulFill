@@ -1,6 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Dashboard</ion-title>
+    <ion-buttons>
+      <ion-button (click)="prevDay()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+      <ion-title>{{todayString}}</ion-title>
+      <ion-button (click)="nextDay()">
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
     <ion-buttons slot="end">
       <ion-button [routerLink]="'/new-task/'" routerDirection="forward">
         <ion-icon slot="icon-only" name="add"></ion-icon>
@@ -21,23 +30,21 @@
     <ion-refresher-content></ion-refresher-content>
 </ion-refresher>   -->
 
-
-  <ion-list>
-    <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
-
-      <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id"
-        routerDirection="forward">
-            <ion-reorder slot="start">
-              <!-- <ion-icon name="pizza"></ion-icon> -->
-            </ion-reorder>
-            <ion-label>{{ task.title }}</ion-label>
-            <ion-label color="primary">{{ task.category }}</ion-label>
-            <ion-label>{{ task.time }} Uhr</ion-label>
+<ng-container *ngFor="let task of tasksService.tasks">
+  <ion-list *ngIf="todayString == task.date">
+    <!-- <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false" > -->
+      <ion-item button detail [routerLink]="'/tasks/' + task.id" routerDirection="forward">
+        <ion-reorder slot="start">
+          <!-- <ion-icon name="pizza"></ion-icon> -->
+        </ion-reorder>
+        <ion-label>{{ task.title }}</ion-label>
+        <ion-label color="primary">{{ task.category }}</ion-label>
+        <!-- <ion-label>{{ task.date }}</ion-label> -->
+        <ion-label>{{ task.time }} Uhr</ion-label>
       </ion-item>
-
-    </ion-reorder-group>
+    <!-- </ion-reorder-group> -->
   </ion-list>
-
+</ng-container>
 
 
 </ion-content>
