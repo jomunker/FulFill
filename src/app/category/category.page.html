@@ -4,17 +4,17 @@
       <ion-back-button (click)="categoryChanged()" (click)="taskChanged()"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Category
+      {{ category.title }}
       <!-- <ion-input (input)="categoryChanged()" [(ngModel)]="category.title"></ion-input> -->
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="deleteCategory()">
-        <ion-icon slot="icon-only" name="trash"></ion-icon>
+        <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-input (input)="categoryChanged()" (input)="taskChanged()" [(ngModel)]="category.title" [(ngModel)]="task.category"></ion-input>
 </ion-content>

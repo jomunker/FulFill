@@ -5,21 +5,26 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-label>Categories</ion-label>
-  <ion-list>
-  <ion-item button detail *ngFor="let category of categoriesService.categories"  [routerLink]="'/category/' + category.id"
-  routerDirection="forward">
-    <ion-label>{{ category.title }}</ion-label>
-    <!-- <ion-select name="category"  (ionChange)="categoryChanged()">
+  <ion-buttons style="display: flex; justify-content: space-between;">
+    <div><ion-label class="subtitle">Categories</ion-label></div>
+    
+    <div><ion-button (click)="addCategory()" class="center" size="small">
+      <ion-icon slot="icon-only" name="add" color="primary"></ion-icon>
+    </ion-button></div>
+    
+  </ion-buttons>
+
+  <ion-list lines="none">
+    <ion-item button detail *ngFor="let category of categoriesService.categories"
+      [routerLink]="'/category/' + category.id" routerDirection="forward">
+      <ion-label class="bold-text">{{ category.title }}</ion-label>
+      <!-- <ion-select name="category"  (ionChange)="categoryChanged()">
       
     </ion-select> -->
-  </ion-item>
-</ion-list>
+    </ion-item>
+  </ion-list>
 
-  <ion-button (click)="addCategory()">Add a Category</ion-button>
+  <!-- <ion-button (click)="addCategory()" class="center" size="small">Add a Category</ion-button> -->
 
-  <ion-item *ngFor="let category of categoriesService.tasks">
-      <ion-label>{{ category.title }}</ion-label>
-      
-    </ion-item>  
+
 </ion-content>

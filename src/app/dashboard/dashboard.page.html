@@ -5,20 +5,21 @@
         <ion-icon slot="start" name="arrow-back"></ion-icon>
       </ion-button>
       <ion-title>{{todayString}}</ion-title>
+
       <ion-button (click)="nextDay()">
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>
     </ion-buttons>
 
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-button [routerLink]="'/new-task/'" routerDirection="forward">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
   <!-- fab to add a Task -->
   <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
@@ -30,21 +31,29 @@
     <ion-refresher-content></ion-refresher-content>
 </ion-refresher>   -->
 
-<ng-container *ngFor="let task of tasksService.tasks">
-  <ion-list *ngIf="todayString == task.date">
-    <!-- <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false" > -->
+  <ng-container *ngFor="let task of tasksService.tasks">
+    <ion-list lines="none" *ngIf="todayString == task.date">
+      <!-- <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false" > -->
       <ion-item button detail [routerLink]="'/tasks/' + task.id" routerDirection="forward">
-        <ion-reorder slot="start">
-          <!-- <ion-icon name="pizza"></ion-icon> -->
-        </ion-reorder>
-        <ion-label>{{ task.title }}</ion-label>
-        <ion-label color="primary">{{ task.category }}</ion-label>
+        <!-- <ion-reorder slot="start"> -->
+        <!-- <ion-icon name="pizza"></ion-icon> -->
+        <!-- </ion-reorder> -->
+        <div>
+          <ion-label style="margin-top: .5em; font-size: 1.2em;"  class="bold-text">{{ task.title }}</ion-label>
+          <ion-label  style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
+        </div>
         <!-- <ion-label>{{ task.date }}</ion-label> -->
-        <ion-label>{{ task.time }} Uhr</ion-label>
+        <ion-label color="primary" class="time">{{ task.time }}</ion-label>
       </ion-item>
-    <!-- </ion-reorder-group> -->
-  </ion-list>
-</ng-container>
+      <!-- </ion-reorder-group> -->
+    </ion-list>
+  </ng-container>
+
+  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed" [routerLink]="'/new-task/'" routerDirection="forward">
+    <ion-fab-button >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
 
 
 </ion-content>

@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,85 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-header {
+  //   height: 2.5rem;
+
+  ion-toolbar {
+    //   height: 2.5rem;
+    border-bottom: 4px solid var(--ion-color-medium);
+
+    :last-child {
+      --border-width: 0;
+    }
+  }
+}
+
+ion-title {
+  font-weight: bold;
+  font-size: x-large;
+  color: var(--ion-color-dark);
+  text-align: center;
+}
+
+
+ion-content {
+
+  .subtitle {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--ion-color-primary);
+  }
+
+  .medium-text {
+    color: var(--ion-color-medium);
+  }
+
+  .bold-text {
+    font-weight: bold;
+  }
+
+  .bold-larger {
+    font-weight: bold;
+    font-size: 1.2em !important;
+  }
+
+  .category {
+    text-align: center;
+  }
+
+  .time {
+    text-align: end;
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
+
+  .center {
+    margin: 0 auto;
+  }
+
+  .item-inner {
+    border: none !important;
+  }
+
+  .list-md {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important; 
+}
+  
+  ion-list {
+    margin-top: 0.2em !important;
+    margin-bottom: 0.2em !important;
+  }
+
+  ion-item {
+    border-bottom: 3px solid var(--ion-color-light);
+  }
+
+  .item-nativ.item-inner a div {
+      border: none !important;
+      --inner-border-width: 0px !important;
+  }
+}

@@ -1,57 +1,92 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>All Tasks</ion-title>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-button [routerLink]="'/new-task/'" routerDirection="forward">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
 </ion-refresher>   -->
-  <ion-item>
-    <ion-label slot="start">Filter by Category</ion-label>
-    <ion-select name="category" #category [interfaceOptions]="customAlertOptions" interface="alert"
-      placeholder="Select One">
-      <ion-select-option selected>All</ion-select-option>
-      <ion-select-option *ngFor="let category of categoriesService.categories">{{ category.title }}</ion-select-option>
-    </ion-select>
+  <ion-item lines="none" style="border-bottom: none">
+    <div style="width: 52%;">
+      <ion-label slot="start" class="medium-text">Filter by <span style="font-size: 1.3em;
+        font-weight: bold;
+        color: var(--ion-color-primary);">Category</span></ion-label>
+    </div>
+    <div style="width: 50%; margin: 0; justify-content: flex-end;
+    display: flex;">
+      <ion-select style="min-width: -webkit-fill-available; text-align: right;"
+        name="category" #category [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Select One">
+        <ion-select-option selected>All</ion-select-option>
+        <ion-select-option *ngFor="let category of categoriesService.categories">{{ category.title }}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
   </ion-item>
 
-  <ion-list *ngIf="category.value == 'All'">
+  <ion-list lines="none" *ngIf="category.value == 'All'">
     <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id"
       routerDirection="forward">
-      <ion-icon name="bookmark"></ion-icon>
-      <ion-label>{{ task.title }}</ion-label>
-      <ion-label color="primary">{{ task.category }}</ion-label>
+      <!-- <ion-icon name="bookmark"></ion-icon> -->
+      <div>
+        <ion-label style="margin-top: .5em; font-size: 1.2em;" class="bold-text">{{ task.title }}</ion-label>
+        <ion-label style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
+      </div>
+
       <!-- <ion-label>{{ task.date }}</ion-label> -->
-      <ion-label>{{ task.time }} Uhr</ion-label>
+      <ion-label color="primary" class="time">{{ task.time }}</ion-label>
     </ion-item>
   </ion-list>
 
-  <ion-list *ngIf="!category.value">
+  <ion-list lines="none" *ngIf="!category.value">
     <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id"
       routerDirection="forward">
-      <ion-icon name="bookmark"></ion-icon>
+      <!-- <ion-icon name="bookmark"></ion-icon> -->
       <ion-label>{{ task.title }}</ion-label>
-      <ion-label color="primary">{{ task.category }}</ion-label>
+      <ion-label color="medium">{{ task.category }}</ion-label>
       <!-- <ion-label>{{ task.date }}</ion-label> -->
-      <ion-label>{{ task.time }} Uhr</ion-label>
+      <ion-label color="primary" class="bold-text">{{ task.time }}</ion-label>
     </ion-item>
   </ion-list>
-<ng-container *ngFor="let task of tasksService.tasks">
-  <ion-list *ngIf="task.category == category.value">
-    <ion-item button detail [hidden]="!task.category == category.value" [routerLink]="'/tasks/' + task.id" routerDirection="forward">
+  <!-- <ng-container *ngFor="let task of tasksService.tasks">
+    <ion-list *ngIf="task.category == category.value">
+      <ion-item button detail [hidden]="!task.category == category.value" [routerLink]="'/tasks/' + task.id"
+        routerDirection="forward">
         <ion-icon name="bookmark"></ion-icon>
         <ion-label>{{ task.title }}</ion-label>
-        <ion-label color="primary">{{ task.category }}</ion-label>
+        <ion-label color="medium">{{ task.category }}</ion-label>
+        <ion-label>{{ task.date }}</ion-label>
+        <ion-label color="primary">{{ task.time }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container> -->
+
+  <ng-container *ngFor="let task of tasksService.tasks">
+    <ion-list lines="none" *ngIf="task.category == category.value">
+      <ion-item button detail [routerLink]="'/tasks/' + task.id" routerDirection="forward">
+        <!-- <ion-icon name="bookmark"></ion-icon> -->
+        <ion-label>{{ task.title }}</ion-label>
+        <ion-label color="medium">{{ task.category }}</ion-label>
         <!-- <ion-label>{{ task.date }}</ion-label> -->
-        <ion-label>{{ task.time }} Uhr</ion-label>
-    </ion-item>
-  </ion-list>
-</ng-container>
+        <ion-label color="primary">{{ task.time }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-title color="dark">Hello</ion-card-title>
+      <ion-card-subtitle color="primary">chund</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>Hello</ion-card-content>
+  </ion-card> -->
+
+
 </ion-content>

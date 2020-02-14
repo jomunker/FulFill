@@ -1,54 +1,61 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tasks"></ion-back-button>
     </ion-buttons>
     <ion-title>New Task</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="addTask()"  (click)="setNotification()">
-        <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+      <ion-button (click)="addTask()" (click)="setNotification()">
+        <ion-icon slot="icon-only" name="checkmark" color="primary"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form>
+  <ion-list lines="none">
     <ion-item>
-      <ion-label>Title</ion-label>
+      <!-- <ion-label>Title</ion-label> -->
       <ion-input name="title" [(ngModel)]="task.title" placeholder="Type your Task here!"></ion-input>
     </ion-item>
-  </form>
-  <ion-item>
-    <ion-label>Category</ion-label>
-    <ion-select name="category" [(ngModel)]="task.category" [interfaceOptions]="customAlertOptions" interface="alert"
-      placeholder="Select One" [compareWith]="compareWith">
-      <ion-select-option *ngFor="let category of categoriesService.categories">{{category.title}}</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-button (click)="addCategory()">Add a Category</ion-button>
-  </ion-item>
-  <ion-item>
-    <ion-textarea [(ngModel)]="task.content" placeholder="...write something to describe your task."></ion-textarea>
-  </ion-item>
-  <ion-item>
-    <ion-label>Timed Task</ion-label>
-    <ion-toggle #timing [(ngModel)]="task.timed"></ion-toggle>
-  </ion-item>
-  <ion-list *ngIf="timing.checked">
-    <ion-item>
-      <ion-label>Date</ion-label>
-      <ion-datetime (ionChange)="date(taskDate)" displayFormat="DD.MM.YYYY" [(ngModel)]="taskDate" placeholder="Pick a date!"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>Time</ion-label>
-      <ion-datetime (ionChange)="time(taskTime)" displayFormat="HH:mm" [(ngModel)]="taskTime" placeholder="Pick a time!"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>Notification</ion-label>
-      <ion-toggle #notifications (ionChange)="setNotification()" [(ngModel)]="task.notification"></ion-toggle>
+    <ion-item style="display: flex; justify-content: space-between;">
+      <ion-buttons>
+        <div>
+          <ion-button (click)="addCategory()" class="center" size="small">
+            <ion-icon slot="icon-only" name="add" color="primary"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-buttons>
+      <ion-label class="bold-larger">Category</ion-label>
+      <ion-select style="min-width: fit-content; text-align: right; padding-left: 0;" name="category"
+        [(ngModel)]="task.category" [interfaceOptions]="customAlertOptions" interface="alert"
+        placeholder="Select Category" [compareWith]="compareWith">
+        <ion-select-option *ngFor="let category of categoriesService.categories">{{category.title}}</ion-select-option>
+      </ion-select>
     </ion-item>
   </ion-list>
 
+<ion-list lines="none">
+  <ion-item>
+    <ion-label class="bold-larger">Timed Task</ion-label>
+    <ion-toggle #timing [(ngModel)]="task.timed"></ion-toggle>
+  </ion-item> 
+    <ng-container *ngIf="timing.checked">
+      <ion-item>
+        <ion-label class="bold-text">Time</ion-label>
+        <ion-datetime displayFormat="HH:mm" [(ngModel)]="task.time" placeholder="Pick a time!"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label class="bold-text">Date</ion-label>
+        <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="task.date" placeholder="Pick a date!"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label class="bold-larger">Notification</ion-label>
+        <ion-toggle #notifications (ionChange)="setNotification()" [(ngModel)]="task.notification"></ion-toggle>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+  <ion-item lines="none" style="border: none;">
+    <ion-textarea [(ngModel)]="task.content" placeholder="...write something to describe your task."></ion-textarea>
+  </ion-item>
 </ion-content>

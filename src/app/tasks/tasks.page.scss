@@ -1,3 +1,44 @@
-.list-ios {
+body {
+  .list-ios {
     margin-bottom: 1px;
+  }
+}
+
+
+
+ion-content {
+  .medium-text {
+    color: var(--ion-color-medium);
+  }
+
+  .bold-text {
+    font-weight: bold;
+  }
+  
+  .category {
+    text-align: center;
+  }
+
+.select-text {
+    width: 100%;
+}
+
+  .time {
+    text-align: end;
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
+
+  ion-select {
+
+    ion-button {
+        text-align: end;
+    }
+  }
+
+  ion-item {
+      
+
+
+  }
 }
