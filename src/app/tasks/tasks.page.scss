@@ -4,8 +4,6 @@ body {
   }
 }
 
-
-
 ion-content {
   .medium-text {
     color: var(--ion-color-medium);
@@ -14,14 +12,14 @@ ion-content {
   .bold-text {
     font-weight: bold;
   }
-  
+
   .category {
     text-align: center;
   }
 
-.select-text {
+  .select-text {
     width: 100%;
-}
+  }
 
   .time {
     text-align: end;
@@ -30,15 +28,29 @@ ion-content {
   }
 
   ion-select {
-
     ion-button {
-        text-align: end;
+      text-align: end;
     }
   }
 
-  ion-item {
-      
-
-
+  ion-list {
+    ion-item {
+      ion-checkbox {
+        button {
+          width: 15% !important;
+        }
+        .button-inner {
+          width: 15% !important;
+        }
+      }
+    }
   }
+}
+
+ion-list ion-item ion-checkbox > button {
+  width: 15% !important;
+}
+
+button {
+  width: 15% !important;
 }

@@ -21,44 +21,72 @@
     </div>
     <div style="width: 50%; margin: 0; justify-content: flex-end;
     display: flex;">
-      <ion-select style="min-width: -webkit-fill-available; text-align: right;"
-        name="category" #category [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Select One">
+      <ion-select style="min-width: -webkit-fill-available; text-align: right;" name="category" #category
+        [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Select One">
         <ion-select-option selected>All</ion-select-option>
         <ion-select-option *ngFor="let category of categoriesService.categories">{{ category.title }}
         </ion-select-option>
       </ion-select>
     </div>
-
   </ion-item>
 
   <ion-list lines="none" *ngIf="category.value == 'All'">
-    <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id"
-      routerDirection="forward">
-      <!-- <ion-icon name="bookmark"></ion-icon> -->
-      <div>
-        <ion-label style="margin-top: .5em; font-size: 1.2em;" class="bold-text">{{ task.title }}</ion-label>
-        <ion-label style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
-      </div>
-
-      <!-- <ion-label>{{ task.date }}</ion-label> -->
-      <ion-label color="primary" class="time">{{ task.time }}</ion-label>
-    </ion-item>
+    <ng-container *ngFor="let task of tasksService.tasks">
+      <ion-item >
+        <ion-checkbox mode='ios' [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;" slot="start" color="primary" class="no-ripple"></ion-checkbox>
+        <div style="width: 72%;">
+          <ion-label style="margin-top: .5em;" class="bold-text">{{ task.title }}</ion-label>
+          <ion-label style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
+        </div>
+        <!-- <ion-label>{{ task.date }}</ion-label> -->
+        <ion-label color="primary" class="time">{{ task.time }}</ion-label>
+        <ion-buttons style="margin-left: 0px;" slot="end">
+          <ion-button [routerLink]="'/tasks/' + task.id" color="medium">
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ng-container>
   </ion-list>
 
-  <ion-list lines="none" *ngIf="!category.value">
+  
+
+
+  <!-- <ion-list lines="none" *ngIf="!category.value">
     <ion-item button detail *ngFor="let task of tasksService.tasks" [routerLink]="'/tasks/' + task.id"
       routerDirection="forward">
-      <!-- <ion-icon name="bookmark"></ion-icon> -->
+      <ion-icon name="bookmark"></ion-icon>
       <ion-label>{{ task.title }}</ion-label>
       <ion-label color="medium">{{ task.category }}</ion-label>
-      <!-- <ion-label>{{ task.date }}</ion-label> -->
+      <ion-label>{{ task.date }}</ion-label>
       <ion-label color="primary" class="bold-text">{{ task.time }}</ion-label>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
+
+
+  <ng-container *ngFor="let task of tasksService.tasks">
+    <ion-list lines="none" *ngIf="category.value == task.category">
+      <ion-item>
+        <ion-checkbox style="margin-right: 1em;" slot="start" color="primary" (ionChange)="deleteTask()"></ion-checkbox>
+        <div style="width: 72%;">
+          <ion-label style="margin-top: .5em;" class="bold-text">{{ task.title }}</ion-label>
+          <ion-label style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
+        </div>
+        <!-- <ion-label>{{ task.date }}</ion-label> -->
+        <ion-label color="primary" class="time">{{ task.time }}</ion-label>
+        <ion-buttons style="margin-left: 0px;" slot="end">
+          <ion-button [routerLink]="'/tasks/' + task.id" color="medium">
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+
   <!-- <ng-container *ngFor="let task of tasksService.tasks">
-    <ion-list *ngIf="task.category == category.value">
-      <ion-item button detail [hidden]="!task.category == category.value" [routerLink]="'/tasks/' + task.id"
-        routerDirection="forward">
+    <ion-list lines="none" *ngIf="task.category == category.value">
+      <ion-item button detail [routerLink]="'/tasks/' + task.id" routerDirection="forward">
         <ion-icon name="bookmark"></ion-icon>
         <ion-label>{{ task.title }}</ion-label>
         <ion-label color="medium">{{ task.category }}</ion-label>
@@ -67,26 +95,6 @@
       </ion-item>
     </ion-list>
   </ng-container> -->
-
-  <ng-container *ngFor="let task of tasksService.tasks">
-    <ion-list lines="none" *ngIf="task.category == category.value">
-      <ion-item button detail [routerLink]="'/tasks/' + task.id" routerDirection="forward">
-        <!-- <ion-icon name="bookmark"></ion-icon> -->
-        <ion-label>{{ task.title }}</ion-label>
-        <ion-label color="medium">{{ task.category }}</ion-label>
-        <!-- <ion-label>{{ task.date }}</ion-label> -->
-        <ion-label color="primary">{{ task.time }}</ion-label>
-      </ion-item>
-    </ion-list>
-  </ng-container>
-
-  <!-- <ion-card>
-    <ion-card-header>
-      <ion-card-title color="dark">Hello</ion-card-title>
-      <ion-card-subtitle color="primary">chund</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>Hello</ion-card-content>
-  </ion-card> -->
 
 
 </ion-content>

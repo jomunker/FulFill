@@ -45,8 +45,16 @@ ion-title {
   text-align: center;
 }
 
+.header-ios ion-toolbar {
+  padding: .4em 0;
+}
+
 
 ion-content {
+
+  button {
+    width: 15% !important;
+  }
 
   .subtitle {
     font-weight: bold;
@@ -75,6 +83,7 @@ ion-content {
     text-align: end;
     font-weight: bold;
     margin-right: 0.5em;
+    font-size: 1.2em;
   }
 
   .center {
@@ -105,4 +114,16 @@ ion-content {
       border: none !important;
       --inner-border-width: 0px !important;
   }
+}
+
+ion-checkbox {
+  position:relative !important;
+
+  .item-cover {
+      width: 70px !important;
+  }
+}
+
+.item {
+  --ripple-color: transparent !important;
 }
