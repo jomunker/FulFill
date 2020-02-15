@@ -11,9 +11,10 @@ import { Category } from '../interfaces/category';
 
 import { Location } from '@angular/common';
 
-import { AlertController} from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { parseISO, format, parse, toDate } from 'date-fns';
 
- 
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.page.html',
@@ -23,8 +24,8 @@ export class DetailsPage implements OnInit {
 
   public task: Task;
   public category: Category;
-
-  constructor(private route: ActivatedRoute, private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController, private notifications: PreferencesService) { 
+  
+  constructor(private route: ActivatedRoute, private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController, private notifications: PreferencesService) {
 
     this.task = {
       id: '',
@@ -34,6 +35,7 @@ export class DetailsPage implements OnInit {
       timed: false,
       notification: false,
       date: '',
+      isoDate: '',
       time: '',
     };
 
@@ -46,7 +48,7 @@ export class DetailsPage implements OnInit {
 
     // Check that the data is loaded before getting the note
     // This handles the case where the detail page is loaded directly via the URL
-    if(this.tasksService.loaded){
+    if (this.tasksService.loaded) {
       this.task = this.tasksService.getTask(taskId)
     } else {
       this.tasksService.load().then(() => {
@@ -55,18 +57,42 @@ export class DetailsPage implements OnInit {
     }
 
     this.categoriesService.load();
+  }
+
+  dateChanged() {
+
+    let dateString = parseISO(this.task.isoDate);
+      this.task.date = format(dateString, 'dd.MM.yyyy')
+      console.log(this.task.date);
+
+    // let dateString = parseISO(this.task.date);
+    // this.task.date = format(dateString, 'dd.MM.yyyy');
+    // let dateString = new Date(this.task.date);
+    // // let chund = parse(this.task.date, 'yyyy-MM-dd', new Date())
+    // let chund = format(dateString, 'dd.MM.yyyy');
+    // this.task.date = chund;
 
   }
 
-  taskChanged(){
+  timeChanged() {
+    // let timeString = parseISO(this.task.time);
+    // console.log(this.task.time);
+    // this.task.time = format(timeString, 'HH:mm')
+    console.log(this.task.time);
+  }
+
+
+  taskChanged() {
     this.tasksService.save();
     console.log(this.task);
   }
 
-  deleteTask(){
+
+  deleteTask() {
     this.tasksService.deleteTask(this.task);
     this.location.back();
   }
+
 
   addCategory() {
 

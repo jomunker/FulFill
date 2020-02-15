@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons>
-      <ion-button (click)="prevDay()">
+      <ion-button left (click)="prevDay()">
         <ion-icon slot="start" name="arrow-back"></ion-icon>
       </ion-button>
       <ion-title>{{todayString}}</ion-title>
 
-      <ion-button (click)="nextDay()">
+      <ion-button rigth (click)="nextDay()">
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -34,18 +34,30 @@
   <ng-container *ngFor="let task of tasksService.tasks">
     <ion-list lines="none" *ngIf="todayString == task.date">
       <!-- <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false" > -->
-      <ion-item button detail [routerLink]="'/tasks/' + task.id" routerDirection="forward">
-        <!-- <ion-reorder slot="start"> -->
-        <!-- <ion-icon name="pizza"></ion-icon> -->
-        <!-- </ion-reorder> -->
+      
+        <ion-item >
+          <ion-checkbox mode='ios' [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;" slot="start" color="primary"></ion-checkbox>
+          <div style="width: 72%;">
+            <ion-label style="margin-top: .5em;" class="bold-text">{{ task.title }}</ion-label>
+            <ion-label style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
+          </div>
+          <!-- <ion-label>{{ task.date }}</ion-label> -->
+          <ion-label color="primary" class="time">{{ task.time }}</ion-label>
+          <ion-buttons style="margin-left: 0px;" slot="end">
+            <ion-button [routerLink]="'/tasks/' + task.id" color="medium">
+              <ion-icon slot="icon-only" name="create"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      
+        <!-- <ion-item button detail [routerLink]="'/tasks/' + task.id" routerDirection="forward">
+        
         <div>
           <ion-label style="margin-top: .5em; font-size: 1.2em;"  class="bold-text">{{ task.title }}</ion-label>
           <ion-label  style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
         </div>
-        <!-- <ion-label>{{ task.date }}</ion-label> -->
         <ion-label color="primary" class="time">{{ task.time }}</ion-label>
-      </ion-item>
-      <!-- </ion-reorder-group> -->
+      </ion-item> -->
     </ion-list>
   </ng-container>
 

@@ -61,8 +61,8 @@
         </ion-item>
         <ion-item>
           <ion-label class="bold-text">Date</ion-label>
-          <ion-datetime displayFormat="DD.MM.YYYY" (ionChange)="dateChanged()" [(ngModel)]="task.date"
-            placeholder="Pick a date!"></ion-datetime>
+          <ion-datetime displayFormat="DD.MM.YYYY" (ionChange)="dateChanged()" [(ngModel)]="task.isoDate"
+            placeholder="Pick a date!" min="2020-01-01"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label class="bold-larger">Notification</ion-label>

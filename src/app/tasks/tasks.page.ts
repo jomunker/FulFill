@@ -31,6 +31,7 @@ export class TasksPage implements OnInit {
       timed: false,
       notification: false,
       date: '',
+      isoDate: '',
       time: '',
     };
 
@@ -62,9 +63,9 @@ export class TasksPage implements OnInit {
     console.log(this.task);
   }
 
-  deleteTask(){
-    this.tasksService.deleteTask(this.task);
-    this.location.back();
+  delete(task){
+    console.log(task)
+    this.tasksService.deleteTask(task);
   }
 
   addCategory() {
@@ -93,7 +94,10 @@ export class TasksPage implements OnInit {
     });
   }
 
+
 }
+
+
 
   //addTask(){
   //

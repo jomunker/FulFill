@@ -58,6 +58,11 @@ export class DashboardPage implements OnInit {
     ev.detail.complete();
   }
 
+  delete(task){
+    console.log(task)
+    this.tasksService.deleteTask(task);
+  }
+
   toggleReorderGroup() {
     this.reorderGroup.disabled = !this.reorderGroup.disabled;
   }

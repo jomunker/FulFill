@@ -48,7 +48,7 @@ export class TasksService {
     return this.tasks.find(task => task.id === id);
   }
 
-  createTask(title, category, description, timed, notification, date, time): void {
+  createTask(title, category, description, timed, notification, date, isoDate, time): void {
 
     // Create a unique id that is one larger than the current largest id
     let id = Math.max(...this.tasks.map(task => parseInt(task.id)), 0) + 1;
@@ -69,6 +69,7 @@ export class TasksService {
         timed: timed, 
         notification: notification,
         date: date,
+        isoDate: isoDate,
         time: time,
       });
 
@@ -85,7 +86,7 @@ export class TasksService {
       year: 'numeric'
     }
 
-    return date.toLocaleString('de-en', options);
+    return date.toLocaleDateString('de-en', options);
   }
 
   getTime(time) {
@@ -95,7 +96,7 @@ export class TasksService {
       minute: 'numeric'
     }
 
-    return time.toLocaleString('de-en', options);
+    return time.toLocaleDateString('de-en', options);
   }
 
   deleteTask(task): void {
@@ -110,6 +111,16 @@ export class TasksService {
     }
 
   }
+
+  // removeItem(task){
+
+  //   for(let i = 0; i < this.tasks.length; i++) {
+  //       if(this.tasks[i] == task){
+  //           this.tasks.splice(i, 1);
+  //       }
+  //   }
+  
+  // }
 
 }
 

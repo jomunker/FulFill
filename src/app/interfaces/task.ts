@@ -6,5 +6,7 @@ export interface Task {
     timed: boolean;
     notification: boolean;
     date: string;
+    isoDate: string;
     time: string;
+    
   }

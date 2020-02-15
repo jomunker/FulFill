@@ -8,6 +8,8 @@ import { Location } from '@angular/common';
 
 import { Task } from '../interfaces/task';
 import { Category } from '../interfaces/category';
+import { subDays, format, parseISO } from 'date-fns'
+
 
 import { AlertController } from '@ionic/angular';
 
@@ -46,6 +48,7 @@ export class NewTaskPage implements OnInit {
       timed: false,
       notification: false,
       date: '',
+      isoDate: '',
       time: '',
     };
 
@@ -59,29 +62,56 @@ export class NewTaskPage implements OnInit {
   }
 
 
-  ngOnInit() { }
-
-  time(isoTime) {
-    this.task.time = this.tasksService.getDate(isoTime);
-    console.log(this.tasksService.getDate(isoTime));
+  ngOnInit() {
+    var now = new Date();
+    let chund = new Date(now.getTime() + (10 * 1000));
+    console.log(chund)
   }
 
-  date(isoDate) {
-    this.task.date = this.tasksService.getDate(isoDate);
-    console.log(this.tasksService.getDate(isoDate));
-  }
+  // time(isoTime) {
+  //   this.task.time = this.tasksService.getDate(isoTime);
+  //   console.log(this.tasksService.getDate(isoTime));
+  // }
+
+  // date(isoDate) {
+  //   this.task.date = this.tasksService.getDate(isoDate);
+  //   console.log(this.tasksService.getDate(isoDate));
+  // }
 
   addTask() {
 
-    
+    console.log(this.task.time);
+    console.log(this.task.date);
 
-    // this.task.date =
+    if (this.task.time) {
+      let timeString = parseISO(this.task.time);
+      this.task.time = format(timeString, 'HH:mm')
+      console.log(this.task.time);
+    } else {
+      this.task.time = "";
+
+    }
+
+
+
+    if (this.task.isoDate) {
+      let dateString = parseISO(this.task.isoDate);
+      this.task.date = format(dateString, 'dd.MM.yyyy')
+      console.log(this.task.date);
+
+    } else {
+      this.task.isoDate = "";
+      this.task.date = "";
+    }
+
+
+    // this.task.date = this.tasksService.getTime(this.taskTime);
     //   console.log(this.task.date);
     // this.task.time = this.tasksService.getTime(this.taskTime);
     // console.log(this.task.time);
 
 
-    this.tasksService.createTask(this.task.title, this.task.category, this.task.content, this.task.timed, this.task.notification, this.task.date, this.task.time);
+    this.tasksService.createTask(this.task.title, this.task.category, this.task.content, this.task.timed, this.task.notification, this.task.date, this.task.isoDate, this.task.time);
     console.log(this.task);
 
     this.location.back();
@@ -119,9 +149,8 @@ export class NewTaskPage implements OnInit {
 
 
   setNotification() {
-    if (this.task.time != '' || this.task.title != '') {
-      this.notifications.dailyNotification(this.task.time);
-    }
+      this.notifications.dailyNotification();
+    
   }
 
 
