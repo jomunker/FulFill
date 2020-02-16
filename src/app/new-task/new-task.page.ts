@@ -132,7 +132,11 @@ export class NewTaskPage implements OnInit {
 
   setNotification() {
     this.notifications.dailyNotification();
+    console.log("Notification set")
+  }
 
+  toggleNotif(eve) {
+    this.notifications.toggleChanged(eve);
   }
 
   // LocalNotifications.schedule({

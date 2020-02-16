@@ -34,7 +34,7 @@
   <ion-list lines="none" *ngIf="category.value == 'All'">
     <ng-container *ngFor="let task of tasksService.tasks">
       <ion-item>
-        <ion-checkbox mode='ios' [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;"
+        <ion-checkbox [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;"
           slot="start" color="primary" class="no-ripple"></ion-checkbox>
         <div style="width: 72%;">
           <ion-label style="margin-top: .5em;" class="bold-text">{{ task.title }}</ion-label>
@@ -68,5 +68,11 @@
       </ion-item>
     </ion-list>
   </ng-container>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" [routerLink]="'/new-task/'" routerDirection="forward">
+    <ion-fab-button >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

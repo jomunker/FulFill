@@ -17,7 +17,7 @@
     <!-- check if item has the same date string as the displayed date -->
     <ion-list lines="none" *ngIf="todayString == task.date">
       <ion-item>
-        <ion-checkbox mode='ios' [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;"
+        <ion-checkbox [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;"
           slot="start" color="primary"></ion-checkbox>
         <div style="width: 72%;">
           <ion-label style="margin-top: .5em;" class="bold-text">{{ task.title }}</ion-label>
@@ -33,11 +33,11 @@
     </ion-list>
   </ng-container>
 
-  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed" [routerLink]="'/new-task/'" routerDirection="forward">
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" [routerLink]="'/new-task/'" routerDirection="forward">
     <ion-fab-button >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab> -->
+  </ion-fab>
 
 
 </ion-content>
