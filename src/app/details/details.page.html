@@ -38,7 +38,7 @@
         <ion-select style="min-width: fit-content; text-align: right; padding-left: 0;" name="category"
           [(ngModel)]="task.category" [interfaceOptions]="customAlertOptions" interface="alert"
           placeholder="Select Category" (ionChange)="taskChanged()" [compareWith]="compareWith">
-          <ion-select-option *ngFor="let category of categoriesService.categories">{{category.title}}
+          <ion-select-option *ngFor="let category of categoriesService.categories">{{ category.title }}
           </ion-select-option>
         </ion-select>
       </ion-item>
@@ -63,11 +63,6 @@
           <ion-label class="bold-text">Date</ion-label>
           <ion-datetime displayFormat="DD.MM.YYYY" (ionChange)="dateChanged()" [(ngModel)]="task.isoDate"
             placeholder="Pick a date!" min="2020-01-01"></ion-datetime>
-        </ion-item>
-        <ion-item>
-          <ion-label class="bold-larger">Notification</ion-label>
-          <ion-toggle #notifications (ionChange)="setNotification()" [(ngModel)]="task.notification"
-            (ionChange)="taskChanged()"></ion-toggle>
         </ion-item>
       </ng-container>
     </ion-list>

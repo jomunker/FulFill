@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { TasksService } from '../services/tasks.service';
 import { CategoriesService } from '../services/categories.service';
-import { PreferencesService } from '../services/preferences.service';
 
 import { Location } from '@angular/common';
 
@@ -12,15 +11,6 @@ import { format, parseISO } from 'date-fns'
 
 
 import { AlertController } from '@ionic/angular';
-
-import {
-  LocalNotificationsPlugin,
-  LocalNotificationEnabledResult,
-  LocalNotificationPendingList,
-  LocalNotificationActionType,
-  LocalNotification,
-  LocalNotificationScheduleResult
-} from '@capacitor/core';
 
 @Component({
   selector: 'app-new-task',
@@ -33,7 +23,7 @@ export class NewTaskPage implements OnInit {
   public task: Task;
   public category: Category;
 
-  constructor(private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController, private notifications: PreferencesService) {
+  constructor(private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController) {
 
     this.task = {
       id: '',
@@ -41,7 +31,6 @@ export class NewTaskPage implements OnInit {
       category: '',
       content: '',
       timed: false,
-      notification: false,
       date: '',
       isoDate: '',
       time: '',
@@ -66,12 +55,16 @@ export class NewTaskPage implements OnInit {
     this.checkTime();
     this.checkDate();
 
-
-    this.tasksService.createTask(this.task.title, this.task.category, this.task.content, this.task.timed, this.task.notification, this.task.date, this.task.isoDate, this.task.time);
+    console.log(this.task.category);
     console.log(this.task);
+    this.tasksService.createTask(this.task.title, this.task.category, this.task.content, this.task.timed, this.task.date, this.task.isoDate, this.task.time);
+    console.log(this.task);
+
 
     // go back to overview
     this.location.back();
+    console.log(this.task);
+
   }
 
   checkTime() {
@@ -128,31 +121,5 @@ export class NewTaskPage implements OnInit {
   compareWithFn = (o1, o2) => {
     return o1 && o2 ? o1.id === o2.id : o1 === o2;
   };
-
-
-  setNotification() {
-    this.notifications.dailyNotification();
-    console.log("Notification set")
-  }
-
-  toggleNotif(eve) {
-    this.notifications.toggleChanged(eve);
-  }
-
-  // LocalNotifications.schedule({
-  //   notifications: [
-  //     {
-  //       title: "Title",
-  //       body: "Body",
-  //       id: 1,
-  //       schedule: { at: new Date(Date.now() + 1000 * 5) },
-  //       sound: null,
-  //       attachments: null,
-  //       actionTypeId: "",
-  //       extra: null
-  //     }
-  //   ]
-  // });
-
 
 }

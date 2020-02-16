@@ -4,7 +4,6 @@ export interface Task {
   category: string;
   content: string;
   timed: boolean;
-  notification: boolean;
   date: string;
   isoDate: string;
   time: string;

@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { TasksService } from '../services/tasks.service';
 import { CategoriesService } from '../services/categories.service';
-import { PreferencesService } from '../services/preferences.service';
 
 import { Task } from '../interfaces/task';
 import { Category } from '../interfaces/category';
@@ -24,7 +23,7 @@ export class DetailsPage implements OnInit {
   public task: Task;
   public category: Category;
 
-  constructor(private route: ActivatedRoute, private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController, private notifications: PreferencesService) {
+  constructor(private route: ActivatedRoute, private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController) {
 
     this.task = {
       id: '',
@@ -32,7 +31,6 @@ export class DetailsPage implements OnInit {
       category: '',
       content: '',
       timed: false,
-      notification: false,
       date: '',
       isoDate: '',
       time: '',
@@ -41,6 +39,8 @@ export class DetailsPage implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log(this.task)
 
     // get the id of the task from the URL
     let taskId = this.route.snapshot.paramMap.get('id');
@@ -104,17 +104,6 @@ export class DetailsPage implements OnInit {
       alert.present();
     });
   }
-
-  // setNotification() {
-  //   this.notifications.init();
-  //   if (this.task.time != '' || this.task.title != '') {
-  //     this.notifications.scheduleOnce(this.task.time, this.task.title, this.task.content);
-  //   }
-  // }
-
-  // initNotify() {
-  //   this.notifications.init();
-  // }
 
 }
 

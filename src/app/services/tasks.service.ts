@@ -47,7 +47,7 @@ export class TasksService {
     return this.tasks.find(task => task.id === id);
   }
 
-  createTask(title, category, description, timed, notification, date, isoDate, time): void {
+  createTask(title, category, description, timed, date, isoDate, time): void {
 
     // create a unique id that is one larger than the current largest id
     let id = Math.max(...this.tasks.map(task => parseInt(task.id)), 0) + 1;
@@ -67,7 +67,6 @@ export class TasksService {
         category: category,
         content: description,
         timed: timed,
-        notification: notification,
         date: date,
         isoDate: isoDate,
         time: time,
