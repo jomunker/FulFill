@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-shadow>
   <ion-toolbar>
     <ion-title>All Tasks</ion-title>
     <!-- <ion-buttons slot="end">
@@ -32,8 +32,9 @@
 
   <ion-list lines="none" *ngIf="category.value == 'All'">
     <ng-container *ngFor="let task of tasksService.tasks">
-      <ion-item >
-        <ion-checkbox mode='ios' [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;" slot="start" color="primary" class="no-ripple"></ion-checkbox>
+      <ion-item>
+        <ion-checkbox mode='ios' [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;"
+          slot="start" color="primary" class="no-ripple"></ion-checkbox>
         <div style="width: 72%;">
           <ion-label style="margin-top: .5em;" class="bold-text">{{ task.title }}</ion-label>
           <ion-label style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
@@ -49,7 +50,7 @@
     </ng-container>
   </ion-list>
 
-  
+
 
 
   <!-- <ion-list lines="none" *ngIf="!category.value">

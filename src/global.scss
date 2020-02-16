@@ -35,8 +35,15 @@ ion-header {
     :last-child {
       --border-width: 0;
     }
+
   }
+  ::after {
+    background-image: none !important;
+    }
+
+  
 }
+
 
 ion-title {
   font-weight: bold;
