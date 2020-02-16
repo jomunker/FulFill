@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "TasksApp",
+  "appName": "FulFill",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
