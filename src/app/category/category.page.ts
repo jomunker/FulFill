@@ -30,10 +30,10 @@ export class CategoryPage implements OnInit {
     // check that the data is loaded before getting the categories
     // this handles the case where the detail page is loaded directly via the URL
     if (this.categoriesService.loaded) {
-      this.category = this.categoriesService.getTask(categoryId)
+      this.category = this.categoriesService.getTask(categoryId);
     } else {
       this.categoriesService.load().then(() => {
-        this.category = this.categoriesService.getTask(categoryId)
+        this.category = this.categoriesService.getTask(categoryId);
       });
     }
 

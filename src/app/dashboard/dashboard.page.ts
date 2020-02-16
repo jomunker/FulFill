@@ -43,7 +43,7 @@ export class DashboardPage implements OnInit {
     this.today = subDays(this.today, -1);
     this.todayString = formatISO(this.today);
     this.today = parseISO(this.todayString);
-    this.todayString = format(this.today, 'dd.MM.yyyy')
+    this.todayString = format(this.today, 'dd.MM.yyyy');
     console.log(this.todayString);
   }
 
@@ -52,7 +52,7 @@ export class DashboardPage implements OnInit {
     this.today = subDays(this.today, 1);
     this.todayString = formatISO(this.today);
     this.today = parseISO(this.todayString);
-    this.todayString = format(this.today, 'dd.MM.yyyy')
+    this.todayString = format(this.today, 'dd.MM.yyyy');
     console.log(this.todayString);
   }
 

@@ -78,7 +78,7 @@ export class NewTaskPage implements OnInit {
     // parse time if a time is entered
     if (this.task.time) {
       let timeString = parseISO(this.task.time);
-      this.task.time = format(timeString, 'HH:mm')
+      this.task.time = format(timeString, 'HH:mm');
       console.log(this.task.time);
     } else {
       // set task.time to "" if no time is entered

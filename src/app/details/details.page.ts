@@ -48,10 +48,10 @@ export class DetailsPage implements OnInit {
     // check that the data is loaded before getting the task
     // this handles the case where the detail page is loaded directly via the URL
     if (this.tasksService.loaded) {
-      this.task = this.tasksService.getTask(taskId)
+      this.task = this.tasksService.getTask(taskId);
     } else {
       this.tasksService.load().then(() => {
-        this.task = this.tasksService.getTask(taskId)
+        this.task = this.tasksService.getTask(taskId);
       });
     }
 
@@ -62,7 +62,7 @@ export class DetailsPage implements OnInit {
   // parse date if changed
   dateChanged() {
     let dateString = parseISO(this.task.isoDate);
-    this.task.date = format(dateString, 'dd.MM.yyyy')
+    this.task.date = format(dateString, 'dd.MM.yyyy');
     console.log(this.task.date);
   }
 
