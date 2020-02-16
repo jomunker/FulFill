@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button (input)="taskChanged()"></ion-back-button>
+      <ion-back-button (click)="taskChanged()"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ task.title }}</ion-title>
     <ion-buttons slot="end">
@@ -38,8 +38,7 @@
         <ion-select style="min-width: fit-content; text-align: right; padding-left: 0;" name="category"
           [(ngModel)]="task.category" [interfaceOptions]="customAlertOptions" interface="alert"
           placeholder="Select Category" (ionChange)="taskChanged()" [compareWith]="compareWith">
-          <ion-select-option *ngFor="let category of categoriesService.categories">{{ category.title }}
-          </ion-select-option>
+          <ion-select-option *ngFor="let category of categoriesService.categories">{{ category.title }}</ion-select-option>
         </ion-select>
       </ion-item>
     </ng-container>

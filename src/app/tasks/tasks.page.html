@@ -21,17 +21,16 @@
     <div style="width: 50%; margin: 0; justify-content: flex-end;
     display: flex;">
     <!-- select category to filter by -->
-      <ion-select style="min-width: -webkit-fill-available; text-align: right;" name="category" #selCategory
+      <ion-select style="min-width: -webkit-fill-available; text-align: right;" name="category" #category
         [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Select One">
         <ion-select-option selected>All</ion-select-option>
-        <ion-select-option *ngFor="let category of categoriesService.categories">{{ category.title }}
-        </ion-select-option>
+        <ion-select-option *ngFor="let category of categoriesService.categories">{{ category.title }}</ion-select-option>
       </ion-select>
     </div>
   </ion-item>
 
   <!-- list all tasks -->
-  <ion-list lines="none" *ngIf="selCategory.value == 'All'">
+  <ion-list lines="none" *ngIf="category.value == 'All'">
     <ng-container *ngFor="let task of tasksService.tasks">
       <ion-item>
         <ion-checkbox [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;"
@@ -52,9 +51,9 @@
 
   <!-- only list the tasks which have a matching category to the selected one-->
   <ng-container *ngFor="let task of tasksService.tasks">
-    <ion-list lines="none" *ngIf="selCategory.value == 'yeeet'">
+    <ion-list lines="none" *ngIf="category.value == task.category">
       <ion-item>
-        <ion-checkbox style="margin-right: 1em;" slot="start" color="primary" (ionChange)="delete()"></ion-checkbox>
+        <ion-checkbox style="margin-right: 1em;" slot="start" color="primary" (ionChange)="delete(this.task)"></ion-checkbox>
         <div style="width: 72%;">
           <ion-label style="margin-top: .5em;" class="bold-text">{{ task.title }}</ion-label>
           <ion-label style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>

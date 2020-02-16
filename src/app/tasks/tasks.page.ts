@@ -66,7 +66,7 @@ export class TasksPage implements OnInit {
 
   // delete task
   delete(task) {
-    console.log(task)
+    //console.log(task)
     this.tasksService.deleteTask(task);
   }
 
