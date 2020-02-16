@@ -4,10 +4,9 @@ import { TasksService } from '../services/tasks.service';
 import { CategoriesService } from '../services/categories.service';
 import { Task } from '../interfaces/task';
 import { Category } from '../interfaces/category';
-import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { AlertController} from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -21,7 +20,7 @@ export class TasksPage implements OnInit {
   public task: Task;
   public category: Category;
 
-  constructor(private route: ActivatedRoute, private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController) { 
+  constructor(private route: ActivatedRoute, private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController) {
 
     this.task = {
       id: '',
@@ -39,14 +38,15 @@ export class TasksPage implements OnInit {
 
   ngOnInit() {
 
+    // load tasks
     this.tasksService.load();
 
-    // Get the id of the note from the URL
+    // get the id of the task from the URL
     let taskId = this.route.snapshot.paramMap.get('id');
 
-    // Check that the data is loaded before getting the note
-    // This handles the case where the detail page is loaded directly via the URL
-    if(this.tasksService.loaded){
+    // check that the data is loaded before getting the task
+    // this handles the case where the detail page is loaded directly via the URL
+    if (this.tasksService.loaded) {
       this.task = this.tasksService.getTask(taskId)
     } else {
       this.tasksService.load().then(() => {
@@ -54,20 +54,24 @@ export class TasksPage implements OnInit {
       });
     }
 
+    // load categories
     this.categoriesService.load();
 
   }
 
-  taskChanged(){
+  // save task changes
+  taskChanged() {
     this.tasksService.save();
     console.log(this.task);
   }
 
-  delete(task){
+  // delete task
+  delete(task) {
     console.log(task)
     this.tasksService.deleteTask(task);
   }
 
+  // add category via alert
   addCategory() {
 
     this.alertCtrl.create({
@@ -94,36 +98,6 @@ export class TasksPage implements OnInit {
     });
   }
 
-
 }
-
-
-
-  //addTask(){
-  //
-  //   this.alertCtrl.create({
-  //     header: 'New Task',
-  //     message: 'Type in your Task.',
-  //     inputs: [
-  //       {
-  //         type: 'text',
-  //         name: 'title'
-  //       }
-  //     ],
-  //     buttons: [
-  //       {
-  //         text: 'Cancel'
-  //       },
-  //       {
-  //         text: 'Save',
-  //         handler: (data) => {
-  //           this.tasksService.createTask(data.title,'',);
-  //         }
-  //       }
-  //     ]
-  //   }).then((alert) => {
-  //     alert.present();
-  //   });
-  // }
 
 

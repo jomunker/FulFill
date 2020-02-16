@@ -25,25 +25,21 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+
+
 ion-header {
-  //   height: 2.5rem;
 
   ion-toolbar {
-    //   height: 2.5rem;
     border-bottom: 4px solid var(--ion-color-medium);
 
     :last-child {
       --border-width: 0;
     }
-
   }
   ::after {
     background-image: none !important;
-    }
-
-  
+  }
 }
-
 
 ion-title {
   font-weight: bold;
@@ -53,12 +49,10 @@ ion-title {
 }
 
 .header-ios ion-toolbar {
-  padding: .4em 0;
+  padding: 0.4em 0;
 }
 
-
 ion-content {
-
   button {
     width: 15% !important;
   }
@@ -105,9 +99,9 @@ ion-content {
     padding-top: 0;
     padding-bottom: 0;
     margin-top: 0 !important;
-    margin-bottom: 0 !important; 
-}
-  
+    margin-bottom: 0 !important;
+  }
+
   ion-list {
     margin-top: 0.2em !important;
     margin-bottom: 0.2em !important;
@@ -118,16 +112,16 @@ ion-content {
   }
 
   .item-nativ.item-inner a div {
-      border: none !important;
-      --inner-border-width: 0px !important;
+    border: none !important;
+    --inner-border-width: 0px !important;
   }
 }
 
 ion-checkbox {
-  position:relative !important;
+  position: relative !important;
 
   .item-cover {
-      width: 70px !important;
+    width: 70px !important;
   }
 }
 

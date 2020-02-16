@@ -20,10 +20,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot({
-      // name: '__mydb',
-      // driverOrder: ['indexeddb', 'sqlite', 'websql']
-    })
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,

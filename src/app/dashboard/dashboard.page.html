@@ -1,63 +1,35 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons>
-      <ion-button left (click)="prevDay()">
+      <ion-button (click)="prevDay()">
         <ion-icon slot="start" name="arrow-back"></ion-icon>
       </ion-button>
       <ion-title>{{todayString}}</ion-title>
-
-      <ion-button rigth (click)="nextDay()">
+      <ion-button (click)="nextDay()">
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>
     </ion-buttons>
-
-    <!-- <ion-buttons slot="end">
-      <ion-button [routerLink]="'/new-task/'" routerDirection="forward">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-
-  <!-- fab to add a Task -->
-  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button [routerLink]="'/new-task/'" routerDirection="forward">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-</ion-refresher>   -->
-
   <ng-container *ngFor="let task of tasksService.tasks">
+    <!-- check if item has the same date string as the displayed date -->
     <ion-list lines="none" *ngIf="todayString == task.date">
-      <!-- <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false" > -->
-      
-        <ion-item >
-          <ion-checkbox mode='ios' [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;" slot="start" color="primary"></ion-checkbox>
-          <div style="width: 72%;">
-            <ion-label style="margin-top: .5em;" class="bold-text">{{ task.title }}</ion-label>
-            <ion-label style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
-          </div>
-          <!-- <ion-label>{{ task.date }}</ion-label> -->
-          <ion-label color="primary" class="time">{{ task.time }}</ion-label>
-          <ion-buttons style="margin-left: 0px;" slot="end">
-            <ion-button [routerLink]="'/tasks/' + task.id" color="medium">
-              <ion-icon slot="icon-only" name="create"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-item>
-      
-        <!-- <ion-item button detail [routerLink]="'/tasks/' + task.id" routerDirection="forward">
-        
-        <div>
-          <ion-label style="margin-top: .5em; font-size: 1.2em;"  class="bold-text">{{ task.title }}</ion-label>
-          <ion-label  style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
+      <ion-item>
+        <ion-checkbox mode='ios' [(ngModel)]="task.done" (click)="delete(this.task)" style="margin-right: 1em;"
+          slot="start" color="primary"></ion-checkbox>
+        <div style="width: 72%;">
+          <ion-label style="margin-top: .5em;" class="bold-text">{{ task.title }}</ion-label>
+          <ion-label style="margin: .3em 0 .5em 0;" color="medium">{{ task.category }}</ion-label>
         </div>
         <ion-label color="primary" class="time">{{ task.time }}</ion-label>
-      </ion-item> -->
+        <ion-buttons style="margin-left: 0px;" slot="end">
+          <ion-button [routerLink]="'/tasks/' + task.id" color="medium">
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
     </ion-list>
   </ng-container>
 

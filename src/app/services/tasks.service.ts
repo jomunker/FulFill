@@ -14,21 +14,20 @@ export class TasksService {
 
   constructor(public storage: Storage) { }
 
-
   load(): Promise<boolean> {
 
-    // Return a promise so that we know when this operation has completed
+    // return a promise so that we know when this operation has completed
     return new Promise((resolve) => {
 
-      // Get the tasks that were saved into storage
+      // get the tasks that were saved into storage
       this.storage.get('tasks').then((tasks) => {
 
-        // Only set this.tasks to the returned value if there were values stored
+        // only set this.tasks to the returned value if there were values stored
         if (tasks != null) {
           this.tasks = tasks;
         }
 
-        // This allows us to check if the data has been loaded in or not
+        // this allows us to check if the data has been loaded in or not
         this.loaded = true;
         resolve(true);
 
@@ -39,34 +38,35 @@ export class TasksService {
   }
 
   save(): void {
-    // Save the current array of tasks to storage
+    // save the current array of tasks to storage
     this.storage.set('tasks', this.tasks);
   }
 
   getTask(id): Task {
-    // Return the task that has an id matching the id passed in
+    // return the task that has an id matching the id passed in
     return this.tasks.find(task => task.id === id);
   }
 
   createTask(title, category, description, timed, notification, date, isoDate, time): void {
 
-    // Create a unique id that is one larger than the current largest id
+    // create a unique id that is one larger than the current largest id
     let id = Math.max(...this.tasks.map(task => parseInt(task.id)), 0) + 1;
 
 
-
+    // check if a title is entered
     if (title == "") {
       console.log("Please enter your Task!");
       return;
 
-    } else {
+    } // save task if title is entered
+    else {
 
       this.tasks.push({
         id: id.toString(),
         title: title,
         category: category,
         content: description,
-        timed: timed, 
+        timed: timed,
         notification: notification,
         date: date,
         isoDate: isoDate,
@@ -78,49 +78,19 @@ export class TasksService {
 
   }
 
-  getDate(date) {
-
-    let options = {
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric'
-    }
-
-    return date.toLocaleDateString('de-en', options);
-  }
-
-  getTime(time) {
-
-    let options = {
-      hour: 'numeric',
-      minute: 'numeric'
-    }
-
-    return time.toLocaleDateString('de-en', options);
-  }
-
+  // delete a task
   deleteTask(task): void {
 
-    // Get the index in the array of the task that was passed in
+    // get the index in the array of the task that was passed in
     let index = this.tasks.indexOf(task);
 
-    // Delete that element of the array and resave the data
+    // delete that element of the array and resave the data
     if (index > -1) {
       this.tasks.splice(index, 1);
       this.save();
     }
 
   }
-
-  // removeItem(task){
-
-  //   for(let i = 0; i < this.tasks.length; i++) {
-  //       if(this.tasks[i] == task){
-  //           this.tasks.splice(i, 1);
-  //       }
-  //   }
-  
-  // }
 
 }
 

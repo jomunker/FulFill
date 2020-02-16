@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
 
 import { TasksService } from '../services/tasks.service';
 import { CategoriesService } from '../services/categories.service';
@@ -24,7 +23,7 @@ export class DetailsPage implements OnInit {
 
   public task: Task;
   public category: Category;
-  
+
   constructor(private route: ActivatedRoute, private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController, private notifications: PreferencesService) {
 
     this.task = {
@@ -43,11 +42,11 @@ export class DetailsPage implements OnInit {
 
   ngOnInit() {
 
-    // Get the id of the note from the URL
+    // get the id of the task from the URL
     let taskId = this.route.snapshot.paramMap.get('id');
 
-    // Check that the data is loaded before getting the note
-    // This handles the case where the detail page is loaded directly via the URL
+    // check that the data is loaded before getting the task
+    // this handles the case where the detail page is loaded directly via the URL
     if (this.tasksService.loaded) {
       this.task = this.tasksService.getTask(taskId)
     } else {
@@ -56,44 +55,30 @@ export class DetailsPage implements OnInit {
       });
     }
 
+    // load categories
     this.categoriesService.load();
   }
 
+  // parse date if changed
   dateChanged() {
-
     let dateString = parseISO(this.task.isoDate);
-      this.task.date = format(dateString, 'dd.MM.yyyy')
-      console.log(this.task.date);
-
-    // let dateString = parseISO(this.task.date);
-    // this.task.date = format(dateString, 'dd.MM.yyyy');
-    // let dateString = new Date(this.task.date);
-    // // let chund = parse(this.task.date, 'yyyy-MM-dd', new Date())
-    // let chund = format(dateString, 'dd.MM.yyyy');
-    // this.task.date = chund;
-
+    this.task.date = format(dateString, 'dd.MM.yyyy')
+    console.log(this.task.date);
   }
 
-  timeChanged() {
-    // let timeString = parseISO(this.task.time);
-    // console.log(this.task.time);
-    // this.task.time = format(timeString, 'HH:mm')
-    console.log(this.task.time);
-  }
-
-
+  // save task
   taskChanged() {
     this.tasksService.save();
     console.log(this.task);
   }
 
-
+  // delete task
   deleteTask() {
     this.tasksService.deleteTask(this.task);
     this.location.back();
   }
 
-
+  // create category via alert 
   addCategory() {
 
     this.alertCtrl.create({
@@ -119,6 +104,7 @@ export class DetailsPage implements OnInit {
       alert.present();
     });
   }
+
   // setNotification() {
   //   this.notifications.init();
   //   if (this.task.time != '' || this.task.title != '') {

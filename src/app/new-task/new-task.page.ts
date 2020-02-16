@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 
 import { Task } from '../interfaces/task';
 import { Category } from '../interfaces/category';
-import { subDays, format, parseISO } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 
 
 import { AlertController } from '@ionic/angular';
@@ -33,11 +33,6 @@ export class NewTaskPage implements OnInit {
   public task: Task;
   public category: Category;
 
-  public taskTime = new Date();
-  public taskDate = new Date();
-
-  //public notification: LocalNotification;
-
   constructor(private tasksService: TasksService, private categoriesService: CategoriesService, private location: Location, private alertCtrl: AlertController, private notifications: PreferencesService) {
 
     this.task = {
@@ -57,68 +52,55 @@ export class NewTaskPage implements OnInit {
       title: '',
     }
 
-
-
   }
 
 
-  ngOnInit() {
-    var now = new Date();
-    let chund = new Date(now.getTime() + (10 * 1000));
-    console.log(chund)
-  }
+  ngOnInit() { }
 
-  // time(isoTime) {
-  //   this.task.time = this.tasksService.getDate(isoTime);
-  //   console.log(this.tasksService.getDate(isoTime));
-  // }
-
-  // date(isoDate) {
-  //   this.task.date = this.tasksService.getDate(isoDate);
-  //   console.log(this.tasksService.getDate(isoDate));
-  // }
-
+  // create and save task
   addTask() {
 
     console.log(this.task.time);
     console.log(this.task.date);
 
-    if (this.task.time) {
-      let timeString = parseISO(this.task.time);
-      this.task.time = format(timeString, 'HH:mm')
-      console.log(this.task.time);
-    } else {
-      this.task.time = "";
-
-    }
-
-
-
-    if (this.task.isoDate) {
-      let dateString = parseISO(this.task.isoDate);
-      this.task.date = format(dateString, 'dd.MM.yyyy')
-      console.log(this.task.date);
-
-    } else {
-      this.task.isoDate = "";
-      this.task.date = "";
-    }
-
-
-    // this.task.date = this.tasksService.getTime(this.taskTime);
-    //   console.log(this.task.date);
-    // this.task.time = this.tasksService.getTime(this.taskTime);
-    // console.log(this.task.time);
+    this.checkTime();
+    this.checkDate();
 
 
     this.tasksService.createTask(this.task.title, this.task.category, this.task.content, this.task.timed, this.task.notification, this.task.date, this.task.isoDate, this.task.time);
     console.log(this.task);
 
+    // go back to overview
     this.location.back();
   }
 
-  addCategory() {
+  checkTime() {
+    // parse time if a time is entered
+    if (this.task.time) {
+      let timeString = parseISO(this.task.time);
+      this.task.time = format(timeString, 'HH:mm')
+      console.log(this.task.time);
+    } else {
+      // set task.time to "" if no time is entered
+      this.task.time = "";
+    }
+  }
 
+  checkDate() {
+    // parse date if a date is entered
+    if (this.task.isoDate) {
+      let dateString = parseISO(this.task.isoDate);
+      this.task.date = format(dateString, 'dd.MM.yyyy')
+      console.log(this.task.date);
+    } else {
+      // set task.date and isoDate to "" if no date is entered
+      this.task.isoDate = "";
+      this.task.date = "";
+    }
+  }
+
+  // add category via alert
+  addCategory() {
     this.alertCtrl.create({
       header: 'New Category',
       inputs: [
@@ -149,11 +131,9 @@ export class NewTaskPage implements OnInit {
 
 
   setNotification() {
-      this.notifications.dailyNotification();
-    
+    this.notifications.dailyNotification();
+
   }
-
-
 
   // LocalNotifications.schedule({
   //   notifications: [

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../services/categories.service';
 import { Category } from '../interfaces/category';
 
-import { AlertController} from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -16,10 +16,12 @@ export class SettingsPage implements OnInit {
   constructor(private categoriesService: CategoriesService, private alertCtrl: AlertController) { }
 
   ngOnInit() {
+    // load categories
     this.categoriesService.load();
 
   }
 
+  // add a category vie alert
   addCategory() {
 
     this.alertCtrl.create({
@@ -46,11 +48,13 @@ export class SettingsPage implements OnInit {
     });
   }
 
-  deleteCategory(){
+  // delete a category
+  deleteCategory() {
     this.categoriesService.deleteCategory(this.category);
   }
 
-  categoryChanged(){
+  // save changes of a category
+  categoryChanged() {
     this.categoriesService.save();
     console.log(this.category);
   }

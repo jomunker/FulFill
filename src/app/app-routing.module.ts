@@ -21,9 +21,7 @@ const routes: Routes = [
 
   { path: "category/:id", loadChildren: "./category/category.module#CategoryPageModule" },
 
-
 ];
-
 
 @NgModule({
   imports: [

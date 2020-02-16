@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button (input)="taskChanged()"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ task.title}}</ion-title>
+    <ion-title>{{ task.title }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="deleteTask()">
         <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
@@ -15,14 +15,12 @@
 
 <ion-content class="ion-padding">
 
-
-
   <ion-list lines="none">
     <ion-item>
-      <!-- <ion-label>Task</ion-label> -->
       <ion-input name="title" [(ngModel)]="task.title" (input)="taskChanged()"></ion-input>
     </ion-item>
     <ion-item>
+      <!-- details-button -->
       <ion-label color="primary" class="bold-larger">show Details</ion-label>
       <ion-toggle #details></ion-toggle>
     </ion-item>
@@ -30,13 +28,13 @@
       <ion-item>
         <ion-buttons>
           <div>
+            <!-- possibility to add categories while editing the task -->
             <ion-button (click)="addCategory()" class="center" size="small">
               <ion-icon slot="icon-only" name="add" color="primary"></ion-icon>
             </ion-button>
           </div>
         </ion-buttons>
         <ion-label class="bold-larger">Category</ion-label>
-
         <ion-select style="min-width: fit-content; text-align: right; padding-left: 0;" name="category"
           [(ngModel)]="task.category" [interfaceOptions]="customAlertOptions" interface="alert"
           placeholder="Select Category" (ionChange)="taskChanged()" [compareWith]="compareWith">
@@ -45,15 +43,17 @@
         </ion-select>
       </ion-item>
     </ng-container>
-
   </ion-list>
-  <ng-container *ngIf="details.checked">
 
+<!-- details are only viewable and editable if detail-button is checked -->
+  <ng-container *ngIf="details.checked">
     <ion-list lines="none">
       <ion-item>
+        <!-- timing-button -->
         <ion-label class="bold-larger">Timed Task</ion-label>
         <ion-toggle #timing (ionChange)="taskChanged()" [(ngModel)]="task.timed"></ion-toggle>
       </ion-item>
+      <!-- time and date are only viewable if timing-button is checked -->
       <ng-container *ngIf="timing.checked">
         <ion-item>
           <ion-label class="bold-text">Time</ion-label>
@@ -72,8 +72,11 @@
       </ng-container>
     </ion-list>
   </ng-container>
+
+  <!-- task description -->
   <ion-item lines="none" style="border: none;">
     <ion-textarea (input)="taskChanged()" [(ngModel)]="task.content"
       placeholder="...write something to describe your task."></ion-textarea>
   </ion-item>
+
 </ion-content>
